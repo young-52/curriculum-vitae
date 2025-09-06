@@ -326,7 +326,7 @@
     
     text(9pt)[
       09/2023 \
-      \-02/2024
+      -02/2024
     ],
     text(10pt)[
       *Professor Fund Scholarship* \
