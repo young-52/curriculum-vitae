@@ -56,24 +56,14 @@
   grid(
     columns: (1fr, auto),
     gutter: 11pt,
-    align: center,
+    align: horizon,
 
     align(right)[
       #icon[]
     ], 
 
     align(left)[
-      #link("bloomwayz@snu.ac.kr")`,` \
-      #link("jypark@ropas.snu.ac.kr")
-    ],
-
-    align(right)[
-      #icon[󰖟]
-    ],
-
-    align(left)[
-      #link("https://ropas.snu.ac.kr/~jypark")[ropas.snu.ac.kr/\~jypark]
-      
+      #link("bloomwayz@snu.ac.kr")
     ],
 
     align(right)[
@@ -81,7 +71,7 @@
     ], 
 
     align(left)[
-      #link("https://github.com/iamparkj")[github.com/iamparkj]
+      #link("https://github.com/iamparkj")[iamparkj]
     ]
   )
 )
@@ -108,9 +98,8 @@
     list(
       spacing: 1em,
 
-      [ Programming Languages ],
-      [ Static Analysis ],
-      [ Human Factors in Programming Languages ]
+      [ Natural languages and programming languages ],
+      [ Human-computer/AI interaction ]
     ),
 
     v(1em), v(1em),
@@ -145,7 +134,8 @@
     ),
 
     text(9pt)[
-      08/2024-
+      08/2024 \
+      -08/2025
     ],
 
     align(left)[
@@ -229,8 +219,14 @@
         SuperSnake is a simple snake game which accelerates with each level, provided as a web application. Rescript React and Javalin server are used in this project. It is a final project for an SNU undergraduate course _Computer Programming_.
       ]
     ],
+)
 
-    v(4em), v(4em),
+#pagebreak()
+
+#grid(
+    columns: (1fr, 8fr),
+    align: (left, left),
+    gutter: 10pt,
     
     v(1.5em),
     grid(
@@ -243,10 +239,19 @@
     ),
 
     text(9pt)[
+      autumn 2025
+    ],
+    text(10pt)[
+      *Core Computing* (F37.204), Tutor. SNU. \
+    ],
+
+    v(-0.7em), v(-0.7em),
+
+    text(9pt)[
       spring 2025
     ],
     text(10pt)[
-      *Programming Languages* (4190.310), Teaching Assistant. SNU. \
+      *Programming Languages* (4190.310), Undergraduate TA. SNU. \
     ],
 
     v(-0.7em), v(-0.7em),
@@ -299,6 +304,17 @@
     ),
 
     text(9pt)[
+      09/2025 \
+      -08/2026
+    ],
+    text(10pt)[
+      *SK Ecoplant Humanities Scholarship* \
+      SK ecoplant co.,Ltd. \
+    ],
+
+    v(-0.7em), v(-0.7em),
+
+    text(9pt)[
       02/2025
     ],
     text(10pt)[
@@ -343,13 +359,30 @@
     list(
       spacing: 1em,
 
-      [ *Korean/#text(9pt)[한국어]* (native) ],
-      [ *English* (fluent) ],
-      [ *Spanish/Español* (intermediate) ],
-      [ *German/Deutsch* (elementary) ]
+      [ *Korean/#text(9pt)[한국어]* (native, 2003) ],
+      [ *English* (fluent, 2009) ],
+      [ *Spanish/Español* (intermediate, 2020) ],
+      [ *German/Deutsch* (elementary, 2024) ]
     ),
+
+    v(1em), v(1em),
+
+    v(1.5em),
+    grid(
+      columns: (auto, auto),
+      align: horizon,
+      column-gutter: 10pt,
+      
+      text(14pt)[*Programming Languages*],
+      line(length: 100%)
+    ),
+
+    v(5.5em),
+    align(left)[
+      C (2016), Java (2018), *Python* (2019), *LaTeX* (2023), OCaml (2024), *Typst* (2024), JavaScript\/*TypeScript* (2024), Swift (2025), C++ (2025), ReScript (2025), *React* (2025), Rust (2025)
+    ],
 )
 
 #place(bottom + right)[
-  #text(9pt)[_Last updated: 18 July 2025_]
+  #text(9pt)[_Last updated: 7 September 2025_]
 ]
