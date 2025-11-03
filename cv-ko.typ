@@ -45,8 +45,31 @@
 
 #let github(repo) = link("https://github.com/" + repo)[#repo]
 #let github-icon(repo) = link("https://github.com/" + repo)[
-  #text(11pt, baseline: 0.5pt)[]
+  #text(11pt, baseline: 0.5pt, fill: black)[]
 ]
+
+// © 2023 Ruben Felgenhauer
+#let LaTeX = {
+  let A = (
+    offset: (
+      x: -0.33em,
+      y: -0.3em,
+    ),
+    size: 0.7em,
+  )
+  let T = (
+    x_offset: -0.12em    
+  )
+  let E = (
+    x_offset: -0.2em,
+    y_offset: 0.23em,
+    size: 1em
+  )
+  let X = (
+    x_offset: -0.1em
+  )
+  [L#h(A.offset.x)#text(size: A.size, baseline: A.offset.y)[A]#h(T.x_offset)T#h(E.x_offset)#text(size: E.size, baseline: E.y_offset)[E]#h(X.x_offset)X]
+}
 
 #grid(
   columns: (1fr, 2fr),
@@ -80,7 +103,7 @@
     ], 
 
     align(left)[
-      #github("iamparkj")
+      #github("young-52")
     ]
   )
 )
@@ -135,7 +158,7 @@
     align: horizon,
     column-gutter: 10pt,
     
-    text(12pt)[#title],
+    text(12pt, font: sans-fonts, weight: "bold")[#title],
     line(length: 100%)
   ),
 )
@@ -183,8 +206,8 @@
 #header[학력]
 #timeline-entry(
   date: "2023. 3.~",
-  title: "서울대학교 언어학과",
-  position: "학사과정",
+  title: "서울대학교 학사과정",
+  position: "언어학·컴퓨터공학전공",
   body: [
     평점평균: #gpa[4.0/4.3]
   ],
@@ -193,13 +216,20 @@
 
 #header[주요 경력]
 #timeline-entry(
+  date: "2025. 10.~",
+  title: "서울대학교 자연어처리 연구실(SNUNLP)",
+  position: "인턴",
+  body: []
+)
+
+#timeline-entry(
   date: "2024. 8.~2025. 8.",
-  title: "서울대학교 컴퓨터공학부 프로그래밍 연구실(ROPAS)",
+  title: "서울대학교 프로그래밍 연구실(ROPAS)",
   position: "인턴",
   body: [
     - 정적 분석 기반 인공지능 파이썬 튜터 #github-icon("joongwon/AITA-Colab") \
       #text(9pt)[ 프론트엔드 개발에 참여함. ]
-    - M언어 서버 및 VS Code 확장 프로그램 #github-icon("iamparkj/mlang") \
+    - M언어 서버 및 VS Code 확장 프로그램 #github-icon("young-52/mlang") \
       #text(9pt)[ '프로그래밍언어' 강좌 수강생의 과제 수행을 돕기 위해 개발, 배포함. ]
   ]
 )
@@ -227,18 +257,29 @@
 
 #header[프로젝트]
 #timeline-entry(
-  date: "2025. 8.",
-  title: "언어학학사 학위논문 양식 LaTeX 클래스",
-  position: github-icon("iamparkj/snu-ling-ba-thesis"),
+  date: "2025. 9.~",
+  title: "벌교 지역어 조사",
+  position: github-icon("young-52/fieldwork-questionnaire-2025"),
   body: text(9pt)[
-    언어학학사 학위논문 양식을 LaTeX으로 조판함.
+    질문지 제작자 겸 주질문자로 참여함.
+    한국 언어조사 질문지 양식 및 벌교 지역어 조사 질문지를 #LaTeX\으로 조판함.
+    2025학년도 2학기 '언어조사 및 분석' 강좌에서 진행 중인 프로젝트임.
+  ]
+)
+
+#timeline-entry(
+  date: "2025. 8.",
+  title: [언어학학사 학위논문 양식 #LaTeX 클래스],
+  position: github-icon("young-52/snu-ling-ba-thesis"),
+  body: text(9pt)[
+    언어학학사 학위논문 양식을 #LaTeX\으로 조판함.
   ]
 )
 
 #timeline-entry(
   date: "2025. 3.~2025. 6.",
   title: "눈 감고도 쓰겠다!",
-  position: github-icon("iamparkj/hapticky"),
+  position: github-icon("young-52/hapticky"),
   body: text(9pt)[
     저시력자를 위한 햅틱 키보드 프로토타입.
     iPhone 쿼티 키보드의 각 글쇠에 햅틱 피드백을 부여하여 입력 경험을 개선하고자 함.
@@ -246,6 +287,8 @@
   ],
   end: true,
 )
+
+#pagebreak()
 
 #header[교육 경력]
 #timeline-entry(
@@ -275,8 +318,6 @@
   position: "학부생 조교",
   end: true,
 )
-
-#pagebreak()
 
 #header[장학 내역]
 #timeline-entry(
@@ -339,16 +380,24 @@
 )[+]
 
 #timeline-entry(
+  title: "자연어",
+  body: [
+    *한국어* (모어, 2003), 영어 (상, 2009), 스페인어 (중, 2020), 독일어 (하, 2024)
+  ], 
+)
+
+#timeline-entry(
   title: "프로그래밍 언어",
   body: [
-    C (2016), Java (2018), *Python* (2019), *LaTeX* (2023), OCaml (2024), *Typst* (2024), JavaScript\/*TypeScript* (2024), Swift (2025), #cpp (2025), ReScript (2025), *React* (2025), Rust (2025)
+    C (2016), Java (2018), *Python* (2019), *#LaTeX* (2023), OCaml (2024), *Typst* (2024), \
+    JavaScript\/*TypeScript* (2024), Swift (2025), #cpp (2025), ReScript (2025), Rust (2025)
   ], 
 )
 
 #timeline-entry(
   title: "기타",
   body: [
-    Pandas (2019), PyTorch (2023), *React* (2023), GitHub Actions (2025)
+    Pandas (2019), PyTorch (2023), *React* (2025), GitHub Actions (2025)
 
     *굵은 글씨*는 자주 사용하는 것임.
   ], 
@@ -358,5 +407,5 @@
 
 #place(bottom + right)[
   #show "작성일": set text(8pt)
-  #text(9pt, font: sans-fonts)[작성일: \2025. 9. 21.]
+  #text(9pt, font: sans-fonts)[작성일: \2025. 11. 4.]
 ]

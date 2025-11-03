@@ -3,7 +3,7 @@
   margin: (x: 2cm, y: 2cm),
   footer: context [
     #set align(center)
-    #set text(8pt)
+    #set text(8pt, font: "Libertinus Sans")
     #counter(page).display(
       "1",
       both: false,
@@ -11,12 +11,19 @@
   ]
 )
 
+#let serif-fonts = (
+  "Libertinus Serif",
+  "KoPubWorldBatang_Pro"
+)
+
+#let sans-fonts = (
+  "Libertinus Sans",
+  // "KoPubWorldDotum_Pro"
+)
+
 #set text(
   size: 10pt,
-  font: (
-    "Libertinus Serif",
-    "KoPubWorldBatang_Pro"
-  )
+  font: serif-fonts
 )
 
 #show raw: set text(
@@ -27,6 +34,7 @@
 #show link: set text(
   size: 8pt,
   font: "JetBrainsMono NF",
+  fill: rgb(85, 12, 90)
 )
 
 #let icon(it) = text(
@@ -34,6 +42,34 @@
   font: "JetBrainsMono NF",
   it
 )
+
+#let github(repo) = link("https://github.com/" + repo)[#repo]
+#let github-icon(repo) = link("https://github.com/" + repo)[
+  #text(11pt, baseline: 0.5pt, fill: black)[]
+]
+
+// © 2023 Ruben Felgenhauer
+#let LaTeX = {
+  let A = (
+    offset: (
+      x: -0.33em,
+      y: -0.3em,
+    ),
+    size: 0.7em,
+  )
+  let T = (
+    x_offset: -0.12em    
+  )
+  let E = (
+    x_offset: -0.2em,
+    y_offset: 0.23em,
+    size: 1em
+  )
+  let X = (
+    x_offset: -0.1em
+  )
+  [L#h(A.offset.x)#text(size: A.size, baseline: A.offset.y)[A]#h(T.x_offset)T#h(E.x_offset)#text(size: E.size, baseline: E.y_offset)[E]#h(X.x_offset)X]
+}
 
 #grid(
   columns: (1fr, 2fr),
@@ -71,7 +107,7 @@
     ], 
 
     align(left)[
-      #link("https://github.com/iamparkj")[iamparkj]
+      #github("young-52")
     ]
   )
 )
@@ -79,310 +115,275 @@
 #linebreak()
 #linebreak()
 
-#grid(
-    columns: (1fr, 8fr),
-    align: (left, left),
-    gutter: 10pt,
+#set par(
+  leading: 0.8em,
+)
 
-    v(1.5em),
-    grid(
-      columns: (auto, auto),
-      align: horizon,
-      column-gutter: 10pt,
-      
-      text(14pt)[*Interests*],
-      line(length: 100%)
-    ),
+#set grid(
+  columns: (0.8in, auto),
+  align: (right, left),
+  column-gutter: 0.2in,
+)
 
-    h(1cm),
-    list(
-      spacing: 1em,
+#set list(
+  spacing: 1em,
+)
 
-      [ Natural languages and programming languages ],
-      [ Human-computer/AI interaction ]
-    ),
+#let sans(it) = text(
+  size: 10pt,
+  font: sans-fonts,
+)[#it]
 
-    v(1em), v(1em),
+#let sans1(it) = text(
+  size: 10pt,
+  font: sans-fonts,
+  weight: "bold",
+)[#it]
 
-    v(1.5em),
-    grid(
-      columns: (auto, auto),
-      align: horizon,
-      column-gutter: 10pt,
-      
-      text(14pt)[*Education*],
-      line(length: 100%)
-    ),
+#let timeline(it) = par(
+  leading: 0.5em,
+)[
+  #text(
+    size: 8.29pt,
+    font: sans-fonts,
+  )[#it]
+]
 
-    text(9pt)[03/2023-],
-    text(10pt)[
-      *Seoul National University*, Undergraduate, Linguistics. \
-      GPA: 4.0/4.3 \
-      Expected Graduation: February 2028
-    ],
+#let doi(code, author, year) = link(
+  "https://doi.org/" + code
+)[
+  #text(10pt, font: "Libertinus Serif")[
+    #show "et al.": set text(style: "italic")
+    #author (#year) #h(-1pt)
+  ]
+]
 
-    v(1em), v(1em),
+#let header(title) = grid(
+  v(1.5em),
+
+  grid(
+    columns: (auto, auto),
+    align: horizon,
+    column-gutter: 10pt,
     
-    v(1.5em),
-    grid(
-      columns: (auto, auto),
-      align: horizon,
-      column-gutter: 10pt,
-      
-      text(14pt)[*Experiences*],
-      line(length: 100%)
-    ),
+    text(12pt, font: sans-fonts, weight: "bold")[#title],
+    line(length: 100%)
+  ),
+)
 
-    text(9pt)[
-      08/2024 \
-      -08/2025
-    ],
+#let bullet-content(..entries) = grid(
+  v(1.5em),
 
-    align(left)[
-      *Programming Research Laboratory (ROPAS)*, Research intern.
+  for entry in entries.pos() [
+    - #entry
+  ],
 
-      #list(
-        spacing: 1em,
-        
-        [ Static analysis augmented AI Python teaching assistant \
-          #text(9pt)[Ongoing project] ],
-        [ Simple language extension for a typed lambda language
-          (#link("https://github.com/iamparkj/vsm")[iamparkj/vsm]) \
-          #text(9pt)[Distributed for an SNU course _Programming Languages_] ]
-      )
-    ],
+  v(2em),
+)
 
-    v(0em), v(0em), 
+#let timeline-entry(
+  date: "",
+  title: "",
+  position: "",
+  body: none,
+  end: false
+) = grid(
+  [
+    #v(.1em)
+    #timeline[#date]
+  ],
+  [
+    #sans1(title)
+    #text(style: "italic")[#position]
 
-    text(9pt)[
-      02/2023 \
-      -08/2023
-    ],
+    #body
+  ],
 
-    align(left)[
-      *Institute of Humanities, Social Sciences and Social Science Education* \
-      at Korea National University of Education,
-      Research assistant.
+  if end [ #v(2em) ] else [ #v(.5em) ]
+)
 
-      #list(
-        [ Entered lexical entries for sinoxenic word database ]
-      )
-    ],
+#header[Interests]
+#bullet-content(
+  "Natural languages and programming languages",
+  "Human-computer/AI interaction",
+  "Functional programming",
+)
 
-    v(0em), v(0em),
+#header[Education]
+#timeline-entry(
+  date: "Mar 2023 -",
+  title: "Seoul National University,",
+  position: "B.A. in Linguistics & B.Sc. in Computer Science.",
+  body: [
+    - GPA: 4.0/4.3 \
+    - Expected Graduation: February 2028
+  ],
+  end: true,
+)
 
-    text(9pt)[
-      05/2022 \
-      -10/2022
-    ],
+#header[Experiences]
+#timeline-entry(
+  date: "Oct 2025 -",
+  title: "Natural Language Processing Laboratory,",
+  position: "Research intern.",
+  body: []
+)
 
-    align(left)[
-      *Computational Semantics Laboratory* \
-      at Korea University,
-      Research assistant.
+#timeline-entry(
+  date: [Aug 2024 \ - Aug 2025],
+  title: "Programming Language Laboratory (ROPAS),",
+  position: "Research intern.",
+  body: [
+    - Static analysis augmented AI Python teaching assistant #github-icon("joongwon/AITA-Colab") \
+      #text(9pt)[ _Contributed to the frontend._ ]
+    - M language server and extension #github-icon("young-52/mlang") \
+      #text(9pt)[ _Developed and distributed for an SNU course "Programming Languages"_. ]
+  ]
+)
 
-      #list(
-        spacing: 1em,
+#timeline-entry(
+  date: [May 2022 \ - Oct 2022],
+  title: "Computational Semantics Laboratory,",
+  position: "Research assistant.",
+  body: [
+    - Korean story cloze datasets \
+      #text(9pt)[ _Generated three-sentence stories._ ]
+  ],
+  end: true,
+)
 
-        [ Generated three-sentence stories for Korean Story Cloze datasets ]
-      )
-    ],
+#header[Other Projects]
+#timeline-entry(
+  date: [Sep 2025 \ - Dec 2025],
+  title: [Fieldwork for Beolgyo Korean],
+  position: github-icon("young-52/fieldwork-questionnaire-2025"),
+  body: text(9pt)[
+    Contributed as a questionnaire editor and a main fieldworker.
+    Created a #LaTeX class to typeset a fieldwork questionnaire.
+    Ongoing project for an SNU undergraduate course _Field Linguistics_.
+  ]
+)
 
-    v(1em), v(1em),
+#timeline-entry(
+  date: "Aug 2025",
+  title: [SNU Linguistics B.A. Thesis #LaTeX Class],
+  position: github-icon("young-52/snu-ling-ba-thesis"),
+  body: text(9pt)[
+    #LaTeX\ified a Bachelor's thesis form for Department of Linguistics, Seoul National University.
+  ]
+)
 
-    v(1.5em),
-    grid(
-      columns: (auto, auto),
-      align: horizon,
-      column-gutter: 10pt,
-      
-      text(14pt)[*Other Projects*],
-      line(length: 100%)
-    ),
-
-    v(5.5em),
-    align(left)[
-      *Hapticky:* a haptic keyboard application for low vision users
-      (#link("https://github.com/iamparkj/hapticky")[iamparkj/hapticky]).
-
-      #text(9pt)[
-        Hapticky is an iOS haptic-augmented keyboard app. Each key has a distinguished haptic pattern so that low-vision users can enter the keyboard more easily. It is a final project for an SNU undergraduate course _Human-Computer Interaction_.
-      ]
-    ],
-
-    v(0em),
-    align(left)[
-      *SuperSnake:* a snake game variation with multi-stage system
-      (#link("https://github.com/iamparkj/super-snake")[iamparkj/super-snake]).
-
-      #text(9pt)[
-        SuperSnake is a simple snake game which accelerates with each level, provided as a web application. Rescript React and Javalin server are used in this project. It is a final project for an SNU undergraduate course _Computer Programming_.
-      ]
-    ],
+#timeline-entry(
+  date: [Mar 2025 \ - Jun 2025],
+  title: "Hapticky",
+  position: github-icon("young-52/hapticky"),
+  body: text(9pt)[
+    An iOS haptic-augmented keyboard app for low vision users.
+    Assigned distinct haptic patterns to keys to improve 
+    iPhone texting experiences.
+    Final project for an SNU undergraduate course _Human-Computer Interaction_.
+  ],
+  end: true,
 )
 
 #pagebreak()
 
-#grid(
-    columns: (1fr, 8fr),
-    align: (left, left),
-    gutter: 10pt,
-    
-    v(1.5em),
-    grid(
-      columns: (auto, auto),
-      align: horizon,
-      column-gutter: 10pt,
-      
-      text(14pt)[*Teaching*],
-      line(length: 100%)
-    ),
-
-    text(9pt)[
-      autumn 2025
-    ],
-    text(10pt)[
-      *Core Computing* (F37.204), Tutor. SNU. \
-    ],
-
-    v(-0.7em), v(-0.7em),
-
-    text(9pt)[
-      spring 2025
-    ],
-    text(10pt)[
-      *Programming Languages* (4190.310), Undergraduate TA. SNU. \
-    ],
-
-    v(-0.7em), v(-0.7em),
-
-    text(9pt)[
-      spring 2025
-    ],
-    text(10pt)[
-      *Basic Computing* (F37.101), Tutor. SNU. \
-      Received Outstanding Tutor Award
-    ],
-
-    v(-0.7em), v(-0.7em),
-
-    text(9pt)[
-      autumn 2024
-    ],
-    text(10pt)[
-      *Core Computing* (L0444.000500), Tutor. SNU. \
-    ],
-
-    v(-0.7em), v(-0.7em),
-
-    text(9pt)[
-      spring 2024
-    ],
-    text(10pt)[
-      *Core Computing* (L0444.000500), Tutor. SNU. \
-    ],
-
-    v(-0.7em), v(-0.7em),
-
-    text(9pt)[
-      summer 2023
-    ],
-    text(10pt)[
-      *Basic Computing* (L0444.000400), Tutor. SNU. \
-    ],
-
-    v(1em), v(1em),
-    
-    v(1.5em),
-    grid(
-      columns: (auto, auto),
-      align: horizon,
-      column-gutter: 10pt,
-      
-      text(14pt)[*Honours*],
-      line(length: 100%)
-    ),
-
-    text(9pt)[
-      09/2025 \
-      -08/2026
-    ],
-    text(10pt)[
-      *SK Ecoplant Humanities Scholarship* \
-      SK ecoplant co.,Ltd. \
-    ],
-
-    v(-0.7em), v(-0.7em),
-
-    text(9pt)[
-      02/2025
-    ],
-    text(10pt)[
-      *Jebong Min Byeong-uk Foundation Scholarship* (full-tuition) \
-      Jebong Min Byeong-uk Foundation \
-    ],
-
-    v(-0.7em), v(-0.7em),
-    
-    text(9pt)[
-      09/2023 \
-      -02/2024
-    ],
-    text(10pt)[
-      *Professor Fund Scholarship* \
-      College of Humanities, Seoul National University \
-    ],
-
-    v(-0.7em), v(-0.7em),
-
-    text(9pt)[
-      08/2023
-    ],
-    text(10pt)[
-      *Ku Jaeseo Scholarship* (half-tuition) \
-      Seoul National University Foundation \
-    ],
-
-    v(1em), v(1em),
-
-    v(1.5em),
-    grid(
-      columns: (auto, auto),
-      align: horizon,
-      column-gutter: 10pt,
-      
-      text(14pt)[*Natural Languages*],
-      line(length: 100%)
-    ),
-
-    h(1cm),
-    list(
-      spacing: 1em,
-
-      [ *Korean/#text(9pt)[한국어]* (native, 2003) ],
-      [ *English* (fluent, 2009) ],
-      [ *Spanish/Español* (intermediate, 2020) ],
-      [ *German/Deutsch* (elementary, 2024) ]
-    ),
-
-    v(1em), v(1em),
-
-    v(1.5em),
-    grid(
-      columns: (auto, auto),
-      align: horizon,
-      column-gutter: 10pt,
-      
-      text(14pt)[*Programming Languages*],
-      line(length: 100%)
-    ),
-
-    v(5.5em),
-    align(left)[
-      C (2016), Java (2018), *Python* (2019), *LaTeX* (2023), OCaml (2024), *Typst* (2024), JavaScript\/*TypeScript* (2024), Swift (2025), C++ (2025), ReScript (2025), *React* (2025), Rust (2025)
-    ],
+#header[Teaching]
+#timeline-entry(
+  date: [
+    Fall 2025 \
+    Spring/Fall 2024
+  ],
+  title: "SNU F37.204 Core Computing,",
+  position: "Tutor.",
 )
 
+#timeline-entry(
+  date: [
+    Spring 2025 \
+    Summer 2023
+  ],
+  title: "SNU F37.101 Basic Computing,",
+  position: "Tutor.",
+  body: text(9pt)[ _Received Outstanding Tutor Award in Spring 2025._ ]
+)
+
+#timeline-entry(
+  date: [
+    Spring 2025
+  ],
+  title: "SNU 4190.310 Programming Languages,",
+  position: "Teaching Assistant.",
+  end: true,
+)
+
+#header[Honours]
+#timeline-entry(
+  date: [Sep 2025 \ - Aug 2026],
+  title: "SK ecoplant,",
+  position: "Humanities Scholarship.",
+)
+
+#timeline-entry(
+  date: "Feb 2025",
+  title: "Jebong Min Byeonguk Foundation,",
+  position: "Scholarship.",
+  body: text(9pt)[ _Full-tuition._ ],
+)
+
+#timeline-entry(
+  date: [Sep 2023 \ - Feb 2024],
+  title: "College of Humanities, SNU,",
+  position: "Professor Fund Scholarship.",
+)
+
+#timeline-entry(
+  date: "Aug 2023",
+  title: "SNU Foundation,",
+  position: "Ku Jaeseo Scholarship.",
+  body: text(9pt)[ _Half-tuition._ ],
+  end: true,
+)
+
+#header[Skills]
+
+#let cp = text(10pt)[C] + h(-.8pt) + text(
+  5.5pt, baseline: -0.2em, font: "JetBrainsMono NF"
+)[+]
+#let cpp = cp + h(-.2pt) + text(
+  5.5pt, baseline: -0.2em, font: "JetBrainsMono NF"
+)[+]
+
+#timeline-entry(
+  title: "Natural Languages",
+  body: [
+    - *Korean/한국어* (native, 2003)
+    - *English* (fluent, 2009)
+    - Spanish/Español (intermediate, 2020)
+    - German/Deutsch (elementary, 2024)
+  ], 
+)
+
+#timeline-entry(
+  title: "Programming Languages",
+  body: [
+    C (2016), Java (2018), *Python* (2019), *#LaTeX* (2023), OCaml (2024), *Typst* (2024), \
+    JavaScript\/*TypeScript* (2024), Swift (2025), #cpp (2025), ReScript (2025), Rust (2025)
+  ], 
+)
+
+#timeline-entry(
+  title: "Libraries & co.",
+  body: [
+    Pandas (2019), PyTorch (2023), *React* (2025), GitHub Actions (2025)
+
+    I use the *bolded* things frequently.
+  ], 
+  end: true,
+)
+
+
 #place(bottom + right)[
-  #text(9pt)[_Last updated: 7 September 2025_]
+  #show "작성일": set text(8pt)
+  #text(9pt, style: "italic")[Last updated: 4 November 2025]
 ]
