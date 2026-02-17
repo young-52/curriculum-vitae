@@ -1,3 +1,5 @@
+/////////////// Page Configuration ///////////////
+
 #set page(
   paper: "a4",
   margin: (x: 2cm, y: 2cm),
@@ -11,6 +13,10 @@
   ]
 )
 
+
+/////////////// Text Style Configuration ///////////////
+
+// Fonts
 #let serif-fonts = (
   "Libertinus Serif",
   "KoPubWorldBatang_Pro"
@@ -21,33 +27,128 @@
   // "KoPubWorldDotum_Pro"
 )
 
+// Default text style
 #set text(
   size: 10pt,
   font: serif-fonts
 )
 
-#show raw: set text(
-  size: 9pt,
-  font: "JetBrainsMono NF"
-)
+// Sans-serif text styles
+#let sans-bold(it) = text(
+  size: 10pt,
+  font: sans-fonts,
+  weight: "bold",
+)[#it]
 
+#let sans-sm(it) = text(
+  size: 8.29pt,
+  font: sans-fonts,
+)[#it]
+
+// For Korean texts
+#show regex("[\u3131-\u318E\uAC00-\uD7A3]"): it => context {
+  set text(size: text.size / 1.11)
+  it
+}
+
+// Hyperlink style
 #show link: set text(
   size: 8pt,
   font: "JetBrainsMono NF",
   fill: rgb(85, 12, 90)
 )
 
+// Icon style
 #let icon(it) = text(
   size: 12pt,
   font: "JetBrainsMono NF",
   it
 )
 
+
+/////////////// Paragraph Style Configuration ///////////////
+
+#set par(
+  leading: 0.8em,
+)
+
+#set grid(
+  columns: (0.8in, auto),
+  align: (right, left),
+  column-gutter: 0.2in,
+)
+
+#set list(
+  spacing: 1em,
+)
+
+
+/////////////// CV Components ///////////////
+
+#let header(title) = grid(
+  v(1.5em),
+
+  grid(
+    columns: (auto, auto),
+    align: horizon,
+    column-gutter: 10pt,
+    
+    text(12pt, font: sans-fonts, weight: "bold")[#title],
+    line(length: 100%)
+  ),
+)
+
+#let bullet-content(..entries) = grid(
+  v(1.5em),
+
+  for entry in entries.pos() [
+    - #entry
+  ],
+
+  v(2em),
+)
+
+#let timeline-entry(
+  date: "",
+  title: "",
+  position: "",
+  body: none,
+  end: false
+) = grid(
+  [
+    #v(.1em)
+    #sans-sm[#date]
+  ],
+  [
+    #sans-bold(title)
+    #text(style: "italic")[#position]
+
+    #body
+  ],
+
+  if end [ #v(2em) ] else [ #v(.5em) ]
+)
+
+
+/////////////// Macros ///////////////
+
+// GitHub hyperlinks
 #let github(repo) = link("https://github.com/" + repo)[#repo]
 #let github-icon(repo) = link("https://github.com/" + repo)[
   #text(11pt, baseline: 0.5pt, fill: black)[]
 ]
 
+// DOI hyperlinks
+#let doi(code, author, year) = link(
+  "https://doi.org/" + code
+)[
+  #text(size: 10pt, font: "Libertinus Serif")[
+    #show "et al.": set text(style: "italic")
+    #author (#year) #h(-1pt)
+  ]
+]
+
+// LaTeX
 // © 2023 Ruben Felgenhauer
 #let LaTeX = {
   let A = (
@@ -70,6 +171,17 @@
   )
   [L#h(A.offset.x)#text(size: A.size, baseline: A.offset.y)[A]#h(T.x_offset)T#h(E.x_offset)#text(size: E.size, baseline: E.y_offset)[E]#h(X.x_offset)X]
 }
+
+// C++
+#let cp = text(10pt)[C] + h(-.8pt) + text(
+  5.5pt, baseline: -0.2em, font: "JetBrainsMono NF"
+)[+]
+#let cpp = cp + h(-.2pt) + text(
+  5.5pt, baseline: -0.2em, font: "JetBrainsMono NF"
+)[+]
+
+
+////////////// Title ///////////////
 
 #grid(
   columns: (1fr, 2fr),
@@ -115,92 +227,8 @@
 #linebreak()
 #linebreak()
 
-#set par(
-  leading: 0.8em,
-)
 
-#set grid(
-  columns: (0.8in, auto),
-  align: (right, left),
-  column-gutter: 0.2in,
-)
-
-#set list(
-  spacing: 1em,
-)
-
-#let sans(it) = text(
-  size: 10pt,
-  font: sans-fonts,
-)[#it]
-
-#let sans1(it) = text(
-  size: 10pt,
-  font: sans-fonts,
-  weight: "bold",
-)[#it]
-
-#let timeline(it) = par(
-  leading: 0.5em,
-)[
-  #text(
-    size: 8.29pt,
-    font: sans-fonts,
-  )[#it]
-]
-
-#let doi(code, author, year) = link(
-  "https://doi.org/" + code
-)[
-  #text(10pt, font: "Libertinus Serif")[
-    #show "et al.": set text(style: "italic")
-    #author (#year) #h(-1pt)
-  ]
-]
-
-#let header(title) = grid(
-  v(1.5em),
-
-  grid(
-    columns: (auto, auto),
-    align: horizon,
-    column-gutter: 10pt,
-    
-    text(12pt, font: sans-fonts, weight: "bold")[#title],
-    line(length: 100%)
-  ),
-)
-
-#let bullet-content(..entries) = grid(
-  v(1.5em),
-
-  for entry in entries.pos() [
-    - #entry
-  ],
-
-  v(2em),
-)
-
-#let timeline-entry(
-  date: "",
-  title: "",
-  position: "",
-  body: none,
-  end: false
-) = grid(
-  [
-    #v(.1em)
-    #timeline[#date]
-  ],
-  [
-    #sans1(title)
-    #text(style: "italic")[#position]
-
-    #body
-  ],
-
-  if end [ #v(2em) ] else [ #v(.5em) ]
-)
+/////////////// Contents ///////////////
 
 #header[Interests]
 #bullet-content(
@@ -346,14 +374,6 @@
 )
 
 #header[Skills]
-
-#let cp = text(10pt)[C] + h(-.8pt) + text(
-  5.5pt, baseline: -0.2em, font: "JetBrainsMono NF"
-)[+]
-#let cpp = cp + h(-.2pt) + text(
-  5.5pt, baseline: -0.2em, font: "JetBrainsMono NF"
-)[+]
-
 #timeline-entry(
   title: "Natural Languages",
   body: [
@@ -384,6 +404,5 @@
 
 
 #place(bottom + right)[
-  #show "작성일": set text(8pt)
   #text(9pt, style: "italic")[Last updated: 4 November 2025]
 ]

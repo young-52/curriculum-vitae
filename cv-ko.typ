@@ -1,3 +1,5 @@
+/////////////// Page Configuration ///////////////
+
 #set page(
   paper: "a4",
   margin: (x: 2cm, y: 2cm),
@@ -11,6 +13,10 @@
   ]
 )
 
+
+/////////////// Text Style Configuration ///////////////
+
+// Fonts
 #let serif-fonts = (
   "Libertinus Serif",
   "KoPubWorldBatang_Pro"
@@ -21,33 +27,131 @@
   "KoPubWorldDotum_Pro"
 )
 
+// Default text style
 #set text(
-  size: 10pt,
+  size: 11pt,
   font: serif-fonts
 )
 
-#show raw: set text(
-  size: 9pt,
-  font: "JetBrainsMono NF"
-)
+// Sans-serif text styles
+#let sans-base(it) = text(
+  size: 11pt,
+  font: sans-fonts,
+)[#it]
 
+#let sans-bold(it) = text(
+  size: 11pt,
+  font: sans-fonts,
+  weight: "bold",
+)[#it]
+
+#let sans-sm(it) = text(
+  size: 8.29pt,
+  font: sans-fonts,
+)[#it]
+
+// For Korean texts
+#show regex("[\u3131-\u318E\uAC00-\uD7A3]"): it => context {
+  let baseline = if (text.size >= 9pt) { 0pt } else { -0.5pt }
+  set text(size: text.size / 1.1, baseline: baseline)
+  it
+}
+
+// Hyperlink style
 #show link: set text(
   size: 8pt,
   font: "JetBrainsMono NF",
   fill: rgb(85, 12, 90)
 )
 
+// Icon style
 #let icon(it) = text(
   size: 12pt,
   font: "JetBrainsMono NF",
   it
 )
 
+
+/////////////// Paragraph Style Configuration ///////////////
+
+#set par(
+  leading: 1.1em,
+)
+
+#set grid(
+  columns: (0.8in, auto),
+  align: (right, left),
+  column-gutter: 0.2in,
+)
+
+#set list(
+  spacing: 1.2em,
+)
+
+
+/////////////// CV Components ///////////////
+
+#let header(title) = grid(
+  v(1.5em),
+
+  grid(
+    columns: (auto, auto),
+    align: horizon,
+    column-gutter: 10pt,
+    
+    text(13pt, font: sans-fonts, weight: "bold")[#title],
+    line(length: 100%)
+  ),
+)
+
+#let bullet-content(..entries) = grid(
+  v(1.5em),
+
+  for entry in entries.pos() [
+    - #entry
+  ],
+
+  v(2em),
+)
+
+#let timeline-entry(
+  date: "",
+  title: "",
+  position: "",
+  body: none,
+  end: false
+) = grid(
+  sans-sm[#date],
+  [
+    #sans-bold(title)
+    #sans-base(position)
+
+    #body
+  ],
+
+  if end [ #v(2em) ] else [ #v(.5em) ]
+)
+
+
+/////////////// Macros ///////////////
+
+// GitHub hyperlinks
 #let github(repo) = link("https://github.com/" + repo)[#repo]
 #let github-icon(repo) = link("https://github.com/" + repo)[
   #text(11pt, baseline: 0.5pt, fill: black)[]
 ]
 
+// DOI hyperlinks
+#let doi(code, author, year) = link(
+  "https://doi.org/" + code
+)[
+  #text(size: 10pt, font: "Libertinus Serif")[
+    #show "et al.": set text(style: "italic")
+    #author (#year) #h(-1pt)
+  ]
+]
+
+// LaTeX
 // © 2023 Ruben Felgenhauer
 #let LaTeX = {
   let A = (
@@ -70,6 +174,17 @@
   )
   [L#h(A.offset.x)#text(size: A.size, baseline: A.offset.y)[A]#h(T.x_offset)T#h(E.x_offset)#text(size: E.size, baseline: E.y_offset)[E]#h(X.x_offset)X]
 }
+
+// C++
+#let cp = text(10pt)[C] + h(-.8pt) + text(
+  5.5pt, baseline: -0.2em, font: "JetBrainsMono NF"
+)[+]
+#let cpp = cp + h(-.2pt) + text(
+  5.5pt, baseline: -0.2em, font: "JetBrainsMono NF"
+)[+]
+
+
+/////////////// Title ///////////////
 
 #grid(
   columns: (1fr, 2fr),
@@ -111,90 +226,8 @@
 #linebreak()
 #linebreak()
 
-#set par(
-  leading: 1.1em,
-)
 
-#set grid(
-  columns: (0.8in, auto),
-  align: (right, left),
-  column-gutter: 0.2in,
-)
-
-#set list(
-  spacing: 1.2em,
-)
-
-#let sans(it) = text(
-  size: 10pt,
-  font: sans-fonts,
-)[#it]
-
-#let sans1(it) = text(
-  size: 10pt,
-  font: sans-fonts,
-  weight: "bold",
-)[#it]
-
-#let timeline(it) = text(
-  size: 8.29pt,
-  font: sans-fonts,
-)[#it]
-
-#let doi(code, author, year) = link(
-  "https://doi.org/" + code
-)[
-  #text(10pt, font: "Libertinus Serif")[
-    #show "et al.": set text(style: "italic")
-    #author (#year) #h(-1pt)
-  ]
-]
-
-#let header(title) = grid(
-  v(1.5em),
-
-  grid(
-    columns: (auto, auto),
-    align: horizon,
-    column-gutter: 10pt,
-    
-    text(12pt, font: sans-fonts, weight: "bold")[#title],
-    line(length: 100%)
-  ),
-)
-
-#let bullet-content(..entries) = grid(
-  v(1.5em),
-
-  for entry in entries.pos() [
-    - #entry
-  ],
-
-  v(2em),
-)
-
-#let gpa(it) = {
-  show "4.0/4.3": set text(size: 11pt)
-  text(it)
-}
-
-#let timeline-entry(
-  date: "",
-  title: "",
-  position: "",
-  body: none,
-  end: false
-) = grid(
-  timeline[#date],
-  [
-    #sans1(title)
-    #sans(position)
-
-    #body
-  ],
-
-  if end [ #v(2em) ] else [ #v(.5em) ]
-)
+/////////////// Contents ///////////////
 
 #header[관심 분야]
 #bullet-content(
@@ -208,9 +241,7 @@
   date: "2023. 3.~",
   title: "서울대학교 학사과정",
   position: "언어학·컴퓨터공학전공",
-  body: [
-    평점평균: #gpa[4.0/4.3]
-  ],
+  body: "평점평균: 4.0/4.3",
   end: true,
 )
 
@@ -371,14 +402,6 @@
 )
 
 #header[보유 기술]
-
-#let cp = text(10pt)[C] + h(-.8pt) + text(
-  5.5pt, baseline: -0.2em, font: "JetBrainsMono NF"
-)[+]
-#let cpp = cp + h(-.2pt) + text(
-  5.5pt, baseline: -0.2em, font: "JetBrainsMono NF"
-)[+]
-
 #timeline-entry(
   title: "자연어",
   body: [
@@ -406,6 +429,5 @@
 
 
 #place(bottom + right)[
-  #show "작성일": set text(8pt)
   #text(9pt, font: sans-fonts)[작성일: \2025. 11. 4.]
 ]
