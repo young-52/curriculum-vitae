@@ -243,7 +243,7 @@
   title: "Seoul National University,",
   position: "B.A. in Linguistics & B.Sc. in Computer Science.",
   body: [
-    - GPA: 4.0/4.3 \
+    - GPA: 3.91/4.3 \
     - Expected Graduation: February 2028
   ],
   end: true,
@@ -263,32 +263,35 @@
   position: "Research intern.",
   body: [
     - Static analysis augmented AI Python teaching assistant #github-icon("joongwon/AITA-Colab") \
-      #text(9pt)[ _Contributed to the frontend._ ]
+      #text(9pt)[ _Designed UI/UX and developed the frontend._ ]
     - M language server and extension #github-icon("young-52/mlang") \
       #text(9pt)[ _Developed and distributed for an SNU course "Programming Languages"_. ]
-  ]
-)
-
-#timeline-entry(
-  date: [May 2022 \ - Oct 2022],
-  title: "Computational Semantics Laboratory,",
-  position: "Research assistant.",
-  body: [
-    - Korean story cloze datasets \
-      #text(9pt)[ _Generated three-sentence stories._ ]
   ],
-  end: true,
+  end: true
 )
 
 #header[Other Projects]
 #timeline-entry(
+  date: [Dec 2025 -],
+  title: [Moiming],
+  position: github-icon("wafflestudio/moiming-web"),
+  body: text(9pt)[
+    A web service for creating and managing meetings.
+    Implemented designs of core pages and developed authentication and event creation features as a frontend developer.
+  ]
+)
+
+#timeline-entry(
   date: [Sep 2025 \ - Dec 2025],
   title: [Fieldwork for Beolgyo Korean],
-  position: github-icon("young-52/fieldwork-questionnaire-2025"),
+  position: [
+    #github-icon("young-52/fieldwork-questionnaire-2025")
+    #github-icon("moonjunmo/fieldwork-report-2025")
+  ],
   body: text(9pt)[
     Contributed as a questionnaire editor and a main fieldworker.
-    Created a #LaTeX class to typeset a fieldwork questionnaire.
-    Ongoing project for an SNU undergraduate course _Field Linguistics_.
+    Typeset a fieldwork questionnaire and a report using #LaTeX.
+    Project for an SNU undergraduate course _Field Linguistics_.
   ]
 )
 
@@ -319,11 +322,21 @@
 #header[Teaching]
 #timeline-entry(
   date: [
+    Spring 2026 \
     Fall 2025 \
     Spring/Fall 2024
   ],
   title: "SNU F37.204 Core Computing,",
   position: "Tutor.",
+)
+
+#timeline-entry(
+  date: [
+    Spring 2026
+  ],
+  title: "SNU M2169.009900 Humanities and Life Seminar,",
+  position: "Teaching Assistant.",
+  end: true,
 )
 
 #timeline-entry(
@@ -395,7 +408,7 @@
 #timeline-entry(
   title: "Libraries & co.",
   body: [
-    Pandas (2019), PyTorch (2023), *React* (2025), GitHub Actions (2025)
+    Pandas (2019), PyTorch (2023), *React* (2025), GitHub Actions (2025), Next.js (2026)
 
     I use the *bolded* things frequently.
   ], 
@@ -404,5 +417,5 @@
 
 
 #place(bottom + right)[
-  #text(9pt, style: "italic")[Last updated: 4 November 2025]
+  #text(9pt, style: "italic")[Last updated: 18 February 2026]
 ]

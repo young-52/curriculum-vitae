@@ -241,7 +241,7 @@
   date: "2023. 3.~",
   title: "서울대학교 학사과정",
   position: "언어학·컴퓨터공학전공",
-  body: "평점평균: 4.0/4.3",
+  body: "평점평균: 3.91/4.3",
   end: true,
 )
 
@@ -259,42 +259,40 @@
   position: "인턴",
   body: [
     - 정적 분석 기반 인공지능 파이썬 튜터 #github-icon("joongwon/AITA-Colab") \
-      #text(9pt)[ 프론트엔드 개발에 참여함. ]
+      #text(9pt)[
+        구글 코랩 웹페이지에서 작동하는 웹 브라우저 확장 프로그램을 제작함.
+        UI/UX 디자인 및 프론트엔드 개발을 담당함.
+      ]
     - M언어 서버 및 VS Code 확장 프로그램 #github-icon("young-52/mlang") \
-      #text(9pt)[ '프로그래밍언어' 강좌 수강생의 과제 수행을 돕기 위해 개발, 배포함. ]
-  ]
-)
-
-// #timeline-entry(
-//   date: "2023. 2.~2023. 8.",
-//   title: "한국교원대학교 인문사회과학교육연구소",
-//   position: "보조원",
-//   body: [
-//     - 동아시아 한자어 정보 데이터베이스 구축 \
-//       #text(9pt)[ "조선말대사전"에 실린 일부 한자어의 정보를 전산화함. ]
-//   ]
-// )
-
-#timeline-entry(
-  date: "2022. 5.~2022. 10.",
-  title: "고려대학교 언어정보연구소",
-  position: "보조원",
-  body: [
-    - 이야기 완성 평가 말뭉치 연구 분석 \
-      #text(9pt)[ 이야기 생성 작업자로 참여함. ]
+      #text(9pt)[
+        '프로그래밍언어' 강좌 수강생의 과제 수행을 돕기 위해 개발, 배포함.
+      ]
   ],
   end: true,
 )
 
 #header[프로젝트]
 #timeline-entry(
-  date: "2025. 9.~",
-  title: "벌교 지역어 조사",
-  position: github-icon("young-52/fieldwork-questionnaire-2025"),
+  date: "2025. 12.~",
+  title: "모이밍",
+  position: github-icon("wafflestudio/moiming-web"),
   body: text(9pt)[
-    질문지 제작자 겸 주질문자로 참여함.
-    한국 언어조사 질문지 양식 및 벌교 지역어 조사 질문지를 #LaTeX\으로 조판함.
-    2025학년도 2학기 '언어조사 및 분석' 강좌에서 진행 중인 프로젝트임.
+    링크 공유 한 번으로 모임을 만들고 참여 인원을 관리할 수 있는 웹 서비스임.
+    프론트엔드 개발을 담당하여 랜딩 페이지 등 다수 화면의 디자인을 구현하고, 로그인·회원가입 등 인증 기능과 모임 생성 기능을 구현함.
+  ]
+)
+
+#timeline-entry(
+  date: "2025. 9.~2025. 12.",
+  title: "벌교 지역어 조사",
+  position: [
+    #github-icon("young-52/fieldwork-questionnaire-2025")
+    #github-icon("moonjunmo/fieldwork-report-2025")
+  ],
+  body: text(9pt)[
+    전남 보성군 벌교읍 일대에서 벌교 지역어의 음운과 어휘, 문법을 조사함.
+    주질문자 겸 질문지 제작자로서 참여하였으며, 조사에 사용한 질문지와 보고서는 #LaTeX\으로 조판하여 공개함.
+    2025학년도 2학기 '언어조사 및 분석' 강좌에서 진행됨.
   ]
 )
 
@@ -324,11 +322,20 @@
 #header[교육 경력]
 #timeline-entry(
   date: par(leading: .5em)[
+    2026 1#text(7pt)[학기] \
     2025 2#text(7pt)[학기] \
     2024 1·2#text(7pt)[학기]
   ],
   title: "컴퓨팅 핵심: 컴퓨터로 생각하기",
   position: "튜터",
+)
+
+#timeline-entry(
+  date: par(leading: .5em)[
+    2026 1#text(7pt)[학기]
+  ],
+  title: "삶과 인문학 세미나",
+  position: "조교",
 )
 
 #timeline-entry(
@@ -380,7 +387,7 @@
 
 #header[기타 경력]
 #timeline-entry(
-  date: "2025. 1.~2026. 2.",
+  date: "2025. 1.~2026. 1.",
   title: "언어학과서포터즈",
   position: "작업반장",
   body: text(9pt)[
@@ -396,7 +403,7 @@
     '인문학 자유 주제 스터디그룹 지원 사업'의 지원을 받음.
     #doi("10.18653/v1/W19-4828", "Clark et al.", 2019),
     #doi("10.18653/v1/2023.findings-emnlp.476", "Starace et al.", 2023)
-    등의 논문을 발제함.
+    등을 발제함.
   ], 
   end: true,
 )
@@ -420,7 +427,7 @@
 #timeline-entry(
   title: "기타",
   body: [
-    Pandas (2019), PyTorch (2023), *React* (2025), GitHub Actions (2025)
+    Pandas (2019), PyTorch (2023), *React* (2025), GitHub Actions (2025), Next.js (2026)
 
     *굵은 글씨*는 자주 사용하는 것임.
   ], 
@@ -429,5 +436,5 @@
 
 
 #place(bottom + right)[
-  #text(9pt, font: sans-fonts)[작성일: \2025. 11. 4.]
+  #text(9pt, font: sans-fonts)[작성일: \2026. 2. 18.]
 ]
